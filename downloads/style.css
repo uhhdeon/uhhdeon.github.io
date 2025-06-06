@@ -1,0 +1,136 @@
+/* Estilos da Página de Downloads */
+body {
+    background-color: #5c2c2c; 
+    background-image: 
+        linear-gradient(45deg, rgba(0,0,0,0.03) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.03) 75%, rgba(0,0,0,0.03)),
+        linear-gradient(45deg, rgba(0,0,0,0.03) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.03) 75%, rgba(0,0,0,0.03));
+    background-size: 8px 8px;
+    background-position: 0 0, 4px 4px;
+    color: #f5e5c5;
+    font-family: 'Press Start 2P', cursive;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    box-sizing: border-box;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+.main-container {
+    width: 100%;
+    max-width: 900px;
+    padding: 30px;
+    background-color: #a0522d;
+    border: 4px solid #4a2511;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.2), 0 0 0 4px #a0522d, 0 0 0 8px #4a2511, 10px 10px 0px #3b1e1e;
+    border-radius: 12px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.main-title-glow {
+    color: #ffd700;
+    text-shadow: 3px 3px #4a2511, 0 0 15px #ffd700, 0 0 25px rgba(255,165,0,0.7);
+    font-size: 2.2em;
+    margin-bottom: 0; /* Ajustado */
+}
+
+.subtitle {
+    margin-top: -15px; /* Puxa para perto do título */
+    font-size: 0.9em;
+    color: #f5e5c5;
+    text-shadow: 1px 1px #4a2511;
+}
+
+.downloads-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap; /* Permite que os cards quebrem para a linha de baixo em telas menores */
+    width: 100%;
+    margin: 20px 0;
+}
+
+.chapter-card {
+    background-color: #6b2727; /* Fundo vinho, como o player */
+    padding: 25px;
+    border: 4px solid #4a2511;
+    border-radius: 10px;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.3), 5px 5px 0 #3b1e1e;
+    flex-basis: 300px; /* Largura base de cada card */
+    flex-grow: 1; /* Permite que cresçam para ocupar espaço */
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+}
+.chapter-card:hover {
+    transform: translateY(-5px);
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.3), 8px 8px 0 #3b1e1e;
+}
+
+.chapter-title {
+    font-size: 1.5em;
+    color: #ffd700;
+    text-shadow: 2px 2px #3b1e1e;
+    border-bottom: 3px dashed #a0522d;
+    padding-bottom: 15px;
+    margin: 0 0 10px 0;
+}
+
+.links-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espaço entre os botões de download */
+}
+
+.styled-button { 
+    font-family: 'Press Start 2P', cursive; font-size: 1.05em; padding: 15px 20px; color: #4a2511; 
+    background-color: #d2b48c; border: 3px solid #4a2511; border-radius: 6px; cursor: pointer;
+    text-decoration: none; display: block; /* Ocupa a largura total do item da lista */
+    position: relative; 
+    transition: all 0.15s ease-out; 
+    box-shadow: 3px 3px 0px #8b4513, inset 0px -2px 0px rgba(0,0,0,0.15);
+}
+.styled-button::before { content: ''; position: absolute; top: 1px; left: 1px; right: 1px; height: 40%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.3), rgba(255,255,255,0));
+    border-radius: 4px 4px 0 0; opacity: 0.7;
+}
+.styled-button:hover { background-color: #ffc857; color: #3b1e1e; border-color: #6b2727; 
+    transform: translateY(-3px); box-shadow: 5px 5px 0px #6b2727, inset 0px -2px 0px rgba(0,0,0,0.1);
+}
+.styled-button:active { transform: translateY(1px); box-shadow: 1px 1px 0px #8b4513, inset 0px 2px 0px rgba(0,0,0,0.2); }
+
+/* Cores específicas opcionais para os botões de download */
+.drive-button { background-color: #c4dff5; /* Azul claro */ }
+.drive-button:hover { background-color: #d6eaff; }
+
+.mediafire-button { background-color: #b3d9ff; /* Azul um pouco mais escuro */ }
+.mediafire-button:hover { background-color: #cce4ff; }
+
+.back-link-container {
+    margin-top: 20px;
+    border-top: 3px dashed #8b4513;
+    padding-top: 25px;
+}
+.back-link-button {
+    font-size: 1.15em;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .main-container { padding: 20px; }
+    .main-title-glow { font-size: 1.8em; }
+    .downloads-container { flex-direction: column; gap: 25px; }
+    .chapter-card { flex-basis: auto; max-width: 100%; }
+}

@@ -1,0 +1,57 @@
+[
+    {
+        "nome": "OST 001 - Menu",
+        "arquivo": "audio/chapter2/ost000menu.mp3",
+        "creditos": {
+            "artistaPrincipal": {
+                "nome": "@eusoudeon",
+                "foto": "img/artistas/Deon.png"
+            },
+            "detalhes": [
+                { "funcao": "Composição", "nome": "@eusoudeon" },
+                { "funcao": "Musica", "nome": "Suno IA" }
+            ]
+        }
+    },
+     {
+        "nome": "OST 002 - Once Upon a Farm",
+        "arquivo": "audio/chapter2/ost002once.mp3",
+        "creditos": {
+            "artistaPrincipal": {
+                "nome": "@daniyusk",
+                "foto": "img/artistas/daniyusk.jpg"
+            },
+            "detalhes": [
+                { "funcao": "Composição", "nome": "@daniyusk" },
+                { "funcao": "Ib", "nome": "@tobyfox" }
+            ]
+        }
+    },
+     {
+        "nome": "OST 003 - David's House Nature",
+        "arquivo": "audio/chapter2/ost003naturalsounds.mp3",
+        "creditos": {
+            "artistaPrincipal": {
+                "nome": "@eusoudeon",
+                "foto": "img/artistas/Deon.png"
+            },
+            "detalhes": [
+                { "funcao": "Composição", "nome": "@eusoudeon" }
+            ]
+        }
+    },
+     {
+        "nome": "OST 004 - Josué Pereira",
+        "arquivo": "audio/chapter2/ost004josue.mp3",
+        "creditos": {
+            "artistaPrincipal": {
+                "nome": "@eusoudeon",
+                "foto": "img/artistas/Deon.png"
+            },
+            "detalhes": [
+                { "funcao": "Composição", "nome": "@eusoudeon" },
+                { "funcao": "Melodia Principal", "nome": "@tobyfox" }
+            ]
+        }
+    }
+]

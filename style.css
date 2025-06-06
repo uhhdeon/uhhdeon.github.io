@@ -1,0 +1,80 @@
+/* Estilos Gerais da Página Inicial (index.html) */
+body {
+    background-color: #5c2c2c; /* Tom de vermelho/vinho mais profundo */
+    color: #f5e5c5; /* Bege mais quente para texto */
+    font-family: 'Press Start 2P', cursive;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    text-align: center;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+    perspective: 1000px; /* Para animações 3D sutis no container */
+}
+
+.container { /* Caixa "Em Construção" */
+    padding: 30px 35px;
+    background-color: #a0522d; /* Tom de madeira/marrom sienna */
+    border: 4px solid #4a2511; /* Borda marrom escura */
+    box-shadow: 
+        inset 0 0 0 3px rgba(255,255,255,0.1), /* Brilho interno sutil */
+        0 0 0 4px #a0522d,
+        0 0 0 8px #4a2511,
+        8px 8px 0px #3b1e1e; /* Sombra projetada mais forte */
+    border-radius: 10px; /* Bordas levemente mais arredondadas, mas ainda "pixel" */
+    animation: popInIntro 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    transform-style: preserve-3d;
+}
+
+@keyframes popInIntro {
+    from { opacity: 0; transform: scale(0.9) rotateY(15deg); }
+    to { opacity: 1; transform: scale(1) rotateY(0deg); }
+}
+
+h1 {
+    font-size: 2.8em; /* Um pouco maior */
+    margin-bottom: 25px;
+    color: #ffd700; /* Amarelo/Dourado */
+    text-shadow: 
+        3px 3px #4a2511, /* Sombra principal */
+        0 0 10px rgba(255,215,0,0.3); /* Brilho sutil no texto */
+}
+
+p {
+    font-size: 1.05em; /* Um pouco maior */
+    line-height: 1.7;
+    color: #f8f0e0; 
+}
+
+a {
+    color: #4a2511; /* Texto escuro no botão */
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 25px;
+    padding: 14px 22px;
+    border: 3px solid #4a2511; 
+    background-color: #ffc857; /* Laranja/Amarelo para o fundo do botão */
+    border-radius: 6px;
+    transition: all 0.2s ease-out; /* Transição para todas as propriedades */
+    box-shadow: 3px 3px 0px #8b4513, /* Sombra projetada */
+                inset 0px 0px 0px 2px rgba(255,255,255,0.2); /* Brilho interno */
+    font-weight: bold; /* Deixa o texto do link mais forte */
+}
+
+a:hover {
+    background-color: #ffd700; 
+    color: #3b1e1e; 
+    border-color: #6b2727; 
+    transform: translateY(-4px) scale(1.03); 
+    box-shadow: 6px 6px 0px #6b2727, /* Sombra maior no hover */
+                inset 0px 0px 0px 2px rgba(255,255,255,0.3);
+}
+
+a:active {
+    transform: translateY(0px) scale(0.98);
+    box-shadow: 1px 1px 0px #4a2511,
+                inset 0px 0px 0px 2px rgba(0,0,0,0.1);
+}

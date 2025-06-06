@@ -1,0 +1,202 @@
+[
+    {
+        "nome": "OST 001 - Pixel Dust",
+        "arquivo": "audio/chapter1/OST 001 - Pixel Dust.mp3",
+        "creditos": {
+            "artistaPrincipal": {
+                "nome": "@eusoudeon",
+                "foto": "img/artistas/Deon.png"
+            },
+            "detalhes": [
+                {
+                    "funcao": "Composição",
+                    "nome": "@eusoudeon"
+                },
+                {
+                    "funcao": "Musica",
+                    "nome": "Suno IA"
+                }
+            ]
+        }
+    },
+    {
+        "nome": "OST 002 - Menu Diff",
+        "arquivo": "audio/chapter1/OST 002 - Menu Diff.mp3",
+        "creditos": {
+            "artistaPrincipal": {
+                "nome": "@eusoudeon",
+                "foto": "img/artistas/Deon.png"
+            },
+            "detalhes": [
+                {
+                    "funcao": "Composição",
+                    "nome": "@eusoudeon"
+                },
+                {
+                    "funcao": "Musica",
+                    "nome": "Suno IA"
+                }
+            ]
+        }
+    },
+    {
+        "nome": "OST 003 - Pest Attack!",
+        "arquivo": "audio/chapter1/OST 003 - Pest Attack!.mp3",
+        "creditos": {
+            "artistaPrincipal": {
+                "nome": "@eusoudeon",
+                "foto": "img/artistas/Deon.png"
+            },
+            "detalhes": [
+                {
+                    "funcao": "Composição",
+                    "nome": "@eusoudeon"
+                },
+                {
+                    "funcao": "Musica",
+                    "nome": "Suno IA"
+                }
+            ]
+        }
+    },
+    {
+        "nome": "OST 004 - Pixel Sunset (UNUSED)",
+        "arquivo": "audio/chapter1/OST 004 - Pixel Sunset (UNUSED).mp3",
+        "creditos": {
+            "artistaPrincipal": {
+                "nome": "@eusoudeon",
+                "foto": "img/artistas/Deon.png"
+            },
+            "detalhes": [
+                {
+                    "funcao": "Composição",
+                    "nome": "@eusoudeon"
+                },
+                {
+                    "funcao": "Musica",
+                    "nome": "Suno IA"
+                }
+            ]
+        }
+    },
+    {
+        "nome": "OST 005 - Xieul",
+        "arquivo": "audio/chapter1/OST 005 - Xieul.mp3",
+        "creditos": {
+            "artistaPrincipal": {
+                "nome": "@eusoudeon",
+                "foto": "img/artistas/Deon.png"
+            },
+            "detalhes": [
+                {
+                    "funcao": "Composição",
+                    "nome": "@eusoudeon"
+                },
+                {
+                    "funcao": "Musica",
+                    "nome": "Suno IA"
+                }
+            ]
+        }
+    },
+    {
+        "nome": "OST 006 - Intro",
+        "arquivo": "audio/chapter1/OST 006 - Intro.wav",
+        "creditos": {
+            "artistaPrincipal": {
+                "nome": "@eusoudeon",
+                "foto": "img/artistas/Deon.png"
+            },
+            "detalhes": [
+                {
+                    "funcao": "Composição",
+                    "nome": "@eusoudeon"
+                },
+                {
+                    "funcao": "Musica",
+                    "nome": "Suno IA"
+                }
+            ]
+        }
+    },
+    {
+        "nome": "OST 007 - Road Drama",
+        "arquivo": "audio/chapter1/OST 007 - Road Drama.mp3",
+        "creditos": {
+            "artistaPrincipal": {
+                "nome": "@eusoudeon",
+                "foto": "img/artistas/Deon.png"
+            },
+            "detalhes": [
+                {
+                    "funcao": "Composição",
+                    "nome": "@eusoudeon"
+                },
+                {
+                    "funcao": "Musica",
+                    "nome": "Suno IA"
+                }
+            ]
+        }
+    },
+    {
+        "nome": "OST 008 - That Pest Again!",
+        "arquivo": "audio/chapter1/OST 008 - That Pest Again!.mp3",
+        "creditos": {
+            "artistaPrincipal": {
+                "nome": "@eusoudeon",
+                "foto": "img/artistas/Deon.png"
+            },
+            "detalhes": [
+                {
+                    "funcao": "Composição",
+                    "nome": "@eusoudeon"
+                },
+                {
+                    "funcao": "Musica",
+                    "nome": "Suno IA"
+                }
+            ]
+        }
+    },
+    {
+        "nome": "OST 009 - Credits Start",
+        "arquivo": "audio/chapter1/OST 009 - Credits Start.wav",
+        "creditos": {
+            "artistaPrincipal": {
+                "nome": "@eusoudeon",
+                "foto": "img/artistas/Deon.png"
+            },
+            "detalhes": [
+                {
+                    "funcao": "Composição",
+                    "nome": "@eusoudeon"
+                },
+                {
+                    "funcao": "Musica",
+                    "nome": "Suno IA"
+                }
+            ]
+        }
+    },
+    {
+        "nome": "OST 010 - Credits!",
+        "arquivo": "audio/chapter1/OST 010 - Credits!.wav",
+        "creditos": {
+            "artistaPrincipal": {
+                "nome": "@eusoudeon",
+                "foto": "img/artistas/Deon.png"
+            },
+            "detalhes": [
+                {
+                    "funcao": "Composição",
+                    "nome": "@eusoudeon"
+                },
+                {
+                    "funcao": "Musica",
+                    "nome": "Suno IA"
+                }
+            ]
+        }
+    }
+]

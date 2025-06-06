@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player de Música Pixel - Seleção</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="chapter-selection-section" class="screen-section">
+        <div class="content-wrapper">
+            <h1 class="main-title-glow">Escolha o Capítulo</h1>
+            <div class="chapter-buttons">
+                <button class="chapter-button styled-button" data-chapter="1">Chapter 1</button>
+                <button class="chapter-button styled-button" data-chapter="2">Chapter 2</button>
+            </div>
+            <p class="back-link-container-main">
+                <a href="../" class="back-link-button styled-button">Voltar para Início</a>
+            </p>
+        </div>
+    </div>
+
+    <div id="music-page-layout" class="screen-section">
+        <div class="song-list-section">
+            <h2 id="chapter-title-display" class="main-title-glow"></h2>
+            <ul id="song-list"></ul>
+            <button id="back-to-chapters" class="back-link-button styled-button">Voltar aos Capítulos</button>
+        </div>
+
+        <div id="player-panel" class="player-panel">
+            <div class="player-container">
+                <button id="close-player-button" class="close-player-button icon-button" aria-label="Fechar player">
+                    <svg class="icon icon-close" viewBox="0 0 16 16" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg">
+                        <line x1="4" y1="4" x2="12" y2="12" stroke-width="2.5"/>
+                        <line x1="12" y1="4" x2="4" y2="12" stroke-width="2.5"/>
+                    </svg>
+                </button>
+                
+                <div class="artist-display-header">
+                    <img id="artist-photo" src="img/artistas/placeholder-artist.png" alt="Foto do Artista">
+                    <div class="artist-name-toggle">
+                        <span id="artist-name">@Artista</span>
+                        <button id="toggle-details-button" class="details-button icon-button" aria-expanded="false" aria-label="Mostrar detalhes dos créditos">
+                            <svg class="icon icon-arrow-down" viewBox="0 0 16 16" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><path d="M3 5 L8 10 L13 5 H3 Z"/></svg>
+                            <svg class="icon icon-arrow-up" viewBox="0 0 16 16" style="display:none;" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><path d="M3 11 L8 6 L13 11 H3 Z"/></svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="detailed-credits" id="detailed-credits"></div>
+                <div class="music-info">
+                    <h3 id="song-title">OST 001 - Menu</h3>
+                </div>
+                <audio id="audio-player" preload="metadata"></audio>
+                <div class="progress-section">
+                    <div class="time-display">
+                        <span id="current-time">0:00</span>
+                        <span id="duration">0:00</span>
+                    </div>
+                    <div class="progress-container" id="progress-container">
+                        <div class="progress-bar" id="progress-bar"></div>
+                    </div>
+                </div>
+                <div class="volume-control-section">
+                    <button id="volume-icon-button" class="volume-icon-button icon-button" aria-label="Controlar volume">
+                        <svg class="icon icon-volume-high" viewBox="0 0 16 16" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 5 L0 11 L3 11 L7 15 L7 1 Z"/> 
+                            <path d="M9 6 H10 V10 H9Z M11 4 H12 V12 H11Z M13 2 H14 V14 H13Z"/> 
+                        </svg>
+                        <svg class="icon icon-volume-medium" viewBox="0 0 16 16" style="display:none;" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 5 L0 11 L3 11 L7 15 L7 1 Z"/> 
+                            <path d="M9 6 H10 V10 H9Z M11 4 H12 V12 H11Z"/> 
+                        </svg>
+                        <svg class="icon icon-volume-low" viewBox="0 0 16 16" style="display:none;" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 5 L0 11 L3 11 L7 15 L7 1 Z"/> 
+                            <path d="M9 6 H10 V10 H9Z"/> 
+                        </svg>
+                        <svg class="icon icon-volume-mute" viewBox="0 0 16 16" style="display:none;" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 5 L0 11 L3 11 L7 15 L7 1 Z"/> 
+                            <path d="M9 4 L15 10 M15 4 L9 10" stroke-width="2.5" fill="none"/> 
+                        </svg>
+                    </button>
+                    <div class="volume-slider-container">
+                        <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="1" aria-label="Slider de volume">
+                    </div>
+                </div>
+                <div class="controls">
+                    <button id="prev-button" class="control-button icon-button styled-button" aria-label="Anterior">
+                        <svg class="icon icon-prev" viewBox="0 0 16 16" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2 L12 14 L14 14 L14 2 Z M10 2 L10 14 L4 8 Z"/>
+                        </svg>
+                    </button>
+                    <button id="play-pause-button" class="control-button icon-button styled-button" aria-label="Play/Pause">
+                        <svg class="icon icon-play" viewBox="0 0 16 16" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><path d="M3 2 L3 14 L13 8 Z"/></svg>
+                        <svg class="icon icon-pause" viewBox="0 0 16 16" style="display:none;" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><path d="M3 2 H6 V14 H3V2 Z M10 2 H13 V14 H10V2 Z"/></svg>
+                    </button>
+                    <button id="next-button" class="control-button icon-button styled-button" aria-label="Próxima">
+                        <svg class="icon icon-next" viewBox="0 0 16 16" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2 2 L2 14 L4 14 L4 2 Z M6 2 L6 14 L12 8 Z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
