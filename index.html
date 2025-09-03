@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Painel Administrativo CCMD</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="imgs/icon.ico" type="image/x-icon">
+</head>
+
+<body>
+
+    <div id="loadingOverlay" style="display:none;">
+        <img src="imgs/loadinggif.gif" alt="Carregando..." />
+    </div>
+
+    <div id="loginScreen">
+        <img id="logo-login" src="imgs/ccmprlogo.png" alt="Logo">
+        <div id="loginDiv">
+            <input id="username" placeholder="Usuário" autocomplete="username" />
+            <input id="password" type="password" placeholder="Senha" autocomplete="current-password" />
+            <button id="loginBtn">Entrar</button>
+            <div id="msg"></div>
+        </div>
+    </div>
+
+    <div id="loggedScreen" style="display:none;">
+        <div id="menuBar">
+            <div class="menuItem">Alunos
+                <div class="dropdown">
+                    <button data-panel="studentsPanel">Adicionar Alunos</button>
+                    <button data-panel="removeStudentsPanel">Remover Alunos</button>
+                    <button data-panel="updateListPanel">Atualizar Lista Completa</button>
+                </div>
+            </div>
+            <div class="menuItem">Usuários
+                <div class="dropdown">
+                    <button data-panel="adminPanel">Criar Novo Usuário</button>
+                    <button data-panel="removeUserPanel" id="removeUserBtn" style="display: none;">Remover
+                        Usuário</button>
+                </div>
+            </div>
+            <div class="menuItem" id="maintenanceMenu" style="display: none;">Manutenção
+                <div class="dropdown">
+                    <button data-panel="logsPanel">Logs de Atividade</button>
+                </div>
+            </div>
+            <div class="menuItem">Advertências
+                <div class="dropdown">
+                    <button data-panel="advertenciaPanel">Lançar Advertência</button>
+                </div>
+            </div>
+            <button id="logoutBtn">Sair</button>
+        </div>
+
+        <main id="mainContent">
+            <img id="logo-logged" src="imgs/ccmprlogo.png" alt="Logo Principal">
+
+            <div id="adminPanel" class="panel">
+                <h3>Criar Novo Usuário</h3><input id="newUser" placeholder="Nome de usuário" /><input id="newPass"
+                    type="password" placeholder="Senha" /><select id="newRole">
+                    <option value="ADMINMASTER">ADMINMASTER</option>
+                    <option value="ADMIN">ADMIN</option>
+                    <option value="MONITOR">MONITOR</option>
+                </select><button id="createUserBtn">Criar</button>
+                <p class="panelMsg" id="createMsg"></p><button class="closePanelBtn">Fechar</button>
+            </div>
+            <div id="studentsPanel" class="panel">
+                <h3>Adicionar Alunos</h3><label for="studentGradeSelect" class="panel-label">Selecione a série para os
+                    alunos abaixo:</label><select id="studentGradeSelect">
+                    <option value="" disabled selected>Escolha a série...</option>
+                    <optgroup label="Fundamental II">
+                        <option value="6°A">6° Ano A</option>
+                        <option value="6°B">6° Ano B</option>
+                        <option value="6°C">6° Ano C</option>
+                        <option value="6°D">6° Ano D</option>
+                        <option value="7°A">7° Ano A</option>
+                        <option value="7°B">7° Ano B</option>
+                        <option value="7°C">7° Ano C</option>
+                        <option value="7°D">7° Ano D</option>
+                        <option value="8°A">8° Ano A</option>
+                        <option value="8°B">8° Ano B</option>
+                        <option value="8°C">8° Ano C</option>
+                        <option value="8°D">8° Ano D</option>
+                        <option value="9°A">9° Ano A</option>
+                        <option value="9°B">9° Ano B</option>
+                        <option value="9°C">9° Ano C</option>
+                        <option value="9°D">9° Ano D</option>
+                    </optgroup>
+                    <optgroup label="Ensino Médio">
+                        <option value="1°A">1° Ano A</option>
+                        <option value="1°B">1° Ano B</option>
+                        <option value="2°A">2° Ano A</option>
+                        <option value="3°A">3° Ano A</option>
+                    </optgroup>
+                    <optgroup label="Técnico em Administração">
+                        <option value="1° ADM">1° ADM</option>
+                        <option value="2° ADM">2° ADM</option>
+                        <option value="3° ADM">3° ADM</option>
+                    </optgroup>
+                </select><textarea class="studentsTextarea" placeholder="Um nome de aluno por linha..."
+                    rows="8"></textarea><button id="addStudentsBtn">Adicionar Alunos</button>
+                <p class="panelMsg" id="studentsMsg"></p><button class="closePanelBtn">Fechar</button>
+            </div>
+            <div id="removeStudentsPanel" class="panel">
+                <h3>Remover Alunos</h3><textarea class="studentsTextarea" placeholder="Um aluno por linha..."
+                    rows="10"></textarea><button id="removeStudentsBtn">Remover</button>
+                <p class="panelMsg" id="removeStudentsMsg"></p><button class="closePanelBtn">Fechar</button>
+            </div>
+            <div id="updateListPanel" class="panel">
+                <h3>Gerenciar Lista</h3><button id="clearListBtn">Limpar Toda a Lista</button><button
+                    id="exportListBtn">Exportar (JSON)</button><label for="importFile" class="file-label">Importar
+                    (JSON)</label><input type="file" id="importFile" accept=".json">
+                <p class="panelMsg" id="updateListMsg"></p><button class="closePanelBtn">Fechar</button>
+            </div>
+            <div id="advertenciaPanel" class="panel">
+                <h3>Lançar Advertência</h3>
+                <p>Use os filtros para encontrar o aluno desejado.</p>
+                <div class="filter-group"><select id="gradeFilter">
+                        <option value="">Todos os Anos</option>
+                    </select><select id="classFilter" style="display: none;">
+                        <option value="">Todas as Turmas</option>
+                    </select></div><input type="text" id="studentSearchFilter" placeholder="Pesquisar nome na lista...">
+                <div id="studentListContainer"></div>
+                <p class="panelMsg" id="searchStudentMsg"></p><button class="closePanelBtn">Fechar</button>
+            </div>
+            <div id="removeUserPanel" class="panel">
+                <h3>Remover Usuário</h3><input id="userToRemove" placeholder="Nome do usuário a ser removido" /><button
+                    id="confirmRemoveUserBtn">Remover Usuário</button>
+                <p class="panelMsg" id="removeUserMsg"></p><button class="closePanelBtn">Fechar</button>
+            </div>
+
+            <div id="logsPanel" class="panel">
+                <h3>Logs de Atividade do Sistema</h3>
+                <div id="logsContainer">
+                </div>
+                <div id="logsActions">
+                    <button id="revertLogsBtn" style="display: none;">Reverter Ação(ões)</button>
+                    <button id="reloadLogsBtn">Recarregar Logs</button>
+                </div>
+                <p id="logsMsg" class="panelMsg"></p>
+                <button class="closePanelBtn">Fechar</button>
+            </div>
+
+        </main>
+    </div>
+
+    <div id="confirmClearModal" class="modal-overlay" style="display:none;">
+        <div class="modal-content">
+            <h2>AÇÃO IRREVERSÍVEL</h2>
+            <p>Tem certeza? Todos os dados de alunos e advertências serão apagados permanentemente.</p>
+            <div class="modal-buttons"><button id="confirmClearActionBtn">SIM, APAGAR TUDO</button><button
+                    id="cancelClearActionBtn">CANCELAR</button></div>
+        </div>
+    </div>
+
+    <footer>Site destinado ao CCMD - Colégio Cívico Militar Douradina.</footer>
+
+    <script type="module">
+        import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+        const supabaseUrl = "https://hjniifmmidnjssbicreg.supabase.co";
+        const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhqbmlpZm1taWRuanNzYmljcmVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY4MzMyMjMsImV4cCI6MjA3MjQwOTIyM30.wzNpczWfngrvqmLaQ3jK7an9U1AoCF-sDdCimd8WVBw";
+        const supabase = createClient(supabaseUrl, supabaseKey);
+
+        const loginScreen = document.getElementById("loginScreen");
+        const loggedScreen = document.getElementById("loggedScreen");
+        const loadingOverlay = document.getElementById('loadingOverlay');
+
+        // --- LÓGICA DE LOGIN E PERMISSÕES ---
+        async function showLoggedScreen(username, role) {
+            localStorage.setItem("loggedAs", username);
+            localStorage.setItem("loggedRole", role);
+            loginScreen.style.display = "none";
+            loggedScreen.style.display = "flex";
+
+            // Permissões de visibilidade dos botões/menus
+            if (role === 'ADMINMASTER') {
+                document.getElementById('removeUserBtn').style.display = 'block';
+            }
+            if (role === 'ADMINMASTER' || role === 'ADMIN') {
+                document.getElementById('revertLogsBtn').style.display = 'block';
+            }
+            if (['ADMINMASTER', 'ADMIN', 'MONITOR'].includes(role)) {
+                document.getElementById('maintenanceMenu').style.display = 'block';
+            }
+
+            await initializeStudentFilters();
+        }
+
+        if (localStorage.getItem("loggedAs") && localStorage.getItem("loggedRole")) {
+            showLoggedScreen(localStorage.getItem("loggedAs"), localStorage.getItem("loggedRole"));
+        }
+
+        // --- LÓGICA DO PAINEL DE LOGS ---
+        const logsContainer = document.getElementById('logsContainer');
+        let lastCheckedIndex = -1; // Para o Shift+Clique
+
+        async function fetchAndRenderLogs() {
+            showMessage('logsMsg', 'Carregando logs...');
+            const { data, error } = await supabase.rpc('get_logs');
+            if (error) {
+                showMessage('logsMsg', 'Erro ao carregar logs: ' + error.message, true);
+                return;
+            }
+
+            logsContainer.innerHTML = `
+                <table class="logs-table">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" id="selectAllLogs"></th>
+                            <th>Data</th>
+                            <th>Usuário</th>
+                            <th>Descrição</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            `;
+            const tbody = logsContainer.querySelector('tbody');
+
+            if (data.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">Nenhum log encontrado.</td></tr>';
+            } else {
+                data.forEach((log, index) => {
+                    const row = document.createElement('tr');
+                    row.className = 'log-row';
+                    row.dataset.index = index;
+                    row.dataset.id = log.id;
+                    if (log.is_reverted) {
+                        row.classList.add('reverted');
+                    }
+                    row.innerHTML = `
+                        <td><input type="checkbox" class="log-checkbox"></td>
+                        <td>${new Date(log.created_at).toLocaleString('pt-BR')}</td>
+                        <td>${log.performed_by}</td>
+                        <td>${log.description}</td>
+                        <td>${log.is_reverted ? 'Revertido' : (log.is_revertable ? 'Reversível' : 'N/A')}</td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            }
+            showMessage('logsMsg', `${data.length} logs carregados.`);
+        }
+
+        // Evento para abrir o painel de logs
+        document.querySelector('button[data-panel="logsPanel"]').addEventListener('click', fetchAndRenderLogs);
+        document.getElementById('reloadLogsBtn').addEventListener('click', fetchAndRenderLogs);
+
+        // Lógica de seleção (clique, shift+clique, selecionar todos)
+        logsContainer.addEventListener('click', (e) => {
+            const row = e.target.closest('.log-row');
+            if (!row) return;
+
+            const checkbox = row.querySelector('.log-checkbox');
+            const currentIndex = parseInt(row.dataset.index, 10);
+
+            if (e.target.tagName !== 'INPUT') { // Permite clicar em qualquer lugar da linha
+                checkbox.checked = !checkbox.checked;
+            }
+
+            const allCheckboxes = [...logsContainer.querySelectorAll('.log-checkbox')];
+
+            if (e.shiftKey && lastCheckedIndex > -1) {
+                const start = Math.min(currentIndex, lastCheckedIndex);
+                const end = Math.max(currentIndex, lastCheckedIndex);
+                allCheckboxes.slice(start, end + 1).forEach(cb => cb.checked = checkbox.checked);
+            }
+
+            lastCheckedIndex = currentIndex;
+            row.classList.toggle('selected', checkbox.checked);
+
+            // Sincroniza o "Selecionar Todos"
+            const allSelected = allCheckboxes.every(cb => cb.checked);
+            document.getElementById('selectAllLogs').checked = allSelected;
+        });
+
+        // Evento para o "Selecionar Todos"
+        logsContainer.addEventListener('change', e => {
+            if (e.target.id === 'selectAllLogs') {
+                const isChecked = e.target.checked;
+                logsContainer.querySelectorAll('.log-checkbox').forEach(cb => {
+                    cb.checked = isChecked;
+                    cb.closest('.log-row').classList.toggle('selected', isChecked);
+                });
+            }
+        });
+
+        // Ação do botão Reverter (chama função que AINDA VAMOS CRIAR)
+        document.getElementById('revertLogsBtn').addEventListener('click', async () => {
+            const selectedRows = [...logsContainer.querySelectorAll('.log-row.selected:not(.reverted)')]; // Pega apenas os não revertidos
+            const idsToRevert = selectedRows.map(row => parseInt(row.dataset.id, 10));
+            const creator = localStorage.getItem("loggedAs");
+
+            if (idsToRevert.length === 0) {
+                showMessage('logsMsg', 'Nenhum log reversível selecionado.', true);
+                return;
+            }
+
+            if (!confirm(`Tem certeza que deseja reverter as ${idsToRevert.length} ações selecionadas?`)) {
+                return;
+            }
+
+            loadingOverlay.style.display = 'flex';
+            showMessage('logsMsg', `Revertendo ${idsToRevert.length} ação(ões)...`);
+
+            const promises = idsToRevert.map(id =>
+                supabase.rpc('revert_action', { p_creator: creator, p_log_id: id })
+            );
+
+            const results = await Promise.all(promises);
+
+            let successCount = 0;
+            let errorCount = 0;
+            results.forEach(result => {
+                if (result.data && result.data[0].ok) {
+                    successCount++;
+                } else {
+                    errorCount++;
+                    console.error('Falha ao reverter:', result.error || result.data[0].msg);
+                }
+            });
+
+            loadingOverlay.style.display = 'none';
+            let finalMsg = `${successCount} ação(ões) revertida(s) com sucesso.`;
+            if (errorCount > 0) {
+                finalMsg += ` ${errorCount} falharam (ver consola para detalhes).`;
+            }
+            showMessage('logsMsg', finalMsg, errorCount > 0);
+
+            // Recarrega a lista de logs para mostrar o novo status "Revertido"
+            await fetchAndRenderLogs();
+        });
+
+
+        // --- Restante do seu código (sem alterações) ---
+        // LÓGICA DE FILTRO DE ALUNOS
+        let allStudents = [];
+        const gradeFilter = document.getElementById('gradeFilter');
+        const classFilter = document.getElementById('classFilter');
+        const studentSearchFilter = document.getElementById('studentSearchFilter');
+        const studentListContainer = document.getElementById('studentListContainer');
+
+        function parseGrade(gradeString) { if (!gradeString) return { year: 'Sem Série', class: '' }; const match = gradeString.match(/^(\d+°)\s*([A-Z]+)$/); if (match) { return { year: `${match[1]} Ano`, class: match[2] }; } return { year: gradeString, class: '' }; }
+        async function initializeStudentFilters() { const { data, error } = await supabase.rpc('get_all_student_names'); if (error) { console.error("Erro ao buscar alunos:", error); return; } allStudents = data; const years = new Set(allStudents.map(s => parseGrade(s.grade).year)); gradeFilter.innerHTML = '<option value="">Todos os Anos</option>';[...years].sort().forEach(year => { gradeFilter.innerHTML += `<option value="${year}">${year}</option>`; }); renderFilteredStudents(); }
+        function renderFilteredStudents() { const selectedYear = gradeFilter.value; const selectedClass = classFilter.value; const searchTerm = studentSearchFilter.value.toLowerCase(); let filtered = allStudents; if (selectedYear) { filtered = filtered.filter(s => parseGrade(s.grade).year === selectedYear); } if (selectedClass) { filtered = filtered.filter(s => parseGrade(s.grade).class === selectedClass); } if (searchTerm) { filtered = filtered.filter(s => s.name.toLowerCase().includes(searchTerm)); } studentListContainer.innerHTML = ''; if (filtered.length === 0) { studentListContainer.innerHTML = '<div class="student-item-none">Nenhum aluno encontrado.</div>'; } else { filtered.forEach(student => { const studentEl = document.createElement('div'); studentEl.className = 'student-item'; studentEl.textContent = `${student.name} (${student.grade || 'N/A'})`; studentEl.onclick = () => { loadingOverlay.style.display = 'flex'; setTimeout(() => { window.location.href = `aluno.html?nome=${encodeURIComponent(student.name)}`; }, 500); }; studentListContainer.appendChild(studentEl); }); } }
+        gradeFilter.addEventListener('change', () => { const selectedYear = gradeFilter.value; const classes = new Set(allStudents.filter(s => parseGrade(s.grade).year === selectedYear).map(s => parseGrade(s.grade).class).filter(Boolean)); if (classes.size > 0) { classFilter.innerHTML = '<option value="">Todas as Turmas</option>';[...classes].sort().forEach(cls => { classFilter.innerHTML += `<option value="${cls}">${cls}</option>`; }); classFilter.style.display = 'inline-block'; } else { classFilter.style.display = 'none'; classFilter.value = ''; } renderFilteredStudents(); });
+        classFilter.addEventListener('change', renderFilteredStudents);
+        studentSearchFilter.addEventListener('input', renderFilteredStudents);
+        function showMessage(elementId, message, isError = false) { const el = document.getElementById(elementId); if (el) { el.textContent = message; el.style.color = isError ? '#ff8a8a' : '#9abf8f'; } }
+        function hideAll() { document.querySelectorAll('.panel').forEach(p => p.style.display = 'none'); document.querySelectorAll('.dropdown').forEach(d => d.style.display = 'none'); }
+        function togglePanel(panelId) { const panel = document.getElementById(panelId); const isVisible = panel.style.display === 'flex'; hideAll(); if (!isVisible) { panel.style.display = 'flex'; } }
+        document.getElementById("loginBtn").addEventListener("click", async () => { document.getElementById("msg").textContent = "Verificando..."; const username = document.getElementById("username").value.trim(); const password = document.getElementById("password").value; const { data, error } = await supabase.rpc("check_login", { p_username: username, p_password: password }); if (error || !data[0] || !data[0].ok) { document.getElementById("msg").textContent = "🔒 Usuário ou senha inválidos."; } else { showLoggedScreen(username, data[0].role); } });
+        document.getElementById("logoutBtn").addEventListener("click", () => { localStorage.clear(); window.location.reload(); });
+        document.querySelectorAll('.dropdown button[data-panel]').forEach(button => button.addEventListener('click', e => { e.stopPropagation(); togglePanel(button.dataset.panel); }));
+        document.querySelectorAll('.menuItem').forEach(item => { item.addEventListener('click', e => { e.stopPropagation(); const d = item.querySelector('.dropdown'); if (!d) return; const isVisible = d.style.display === 'block'; document.querySelectorAll('.dropdown').forEach(i => i.style.display = 'none'); if (!isVisible) d.style.display = 'block'; }); });
+        document.addEventListener('click', () => hideAll());
+        document.querySelectorAll('.panel').forEach(p => p.addEventListener('click', e => e.stopPropagation()));
+        document.querySelectorAll('.closePanelBtn').forEach(btn => btn.addEventListener('click', hideAll));
+        document.getElementById("addStudentsBtn").addEventListener("click", async () => { const names = document.querySelector('#studentsPanel .studentsTextarea').value.split("\n").map(n => n.trim()).filter(Boolean); const grade = document.getElementById('studentGradeSelect').value; if (names.length === 0) { showMessage('studentsMsg', 'Digite pelo menos um nome.', true); return; } if (!grade) { showMessage('studentsMsg', 'Selecione uma série.', true); return; } const students_to_add = names.map(name => ({ p_name: name, p_grade: grade })); showMessage('studentsMsg', 'Adicionando...'); const { data, error } = await supabase.rpc("add_students_with_grade", { students: students_to_add, p_creator: localStorage.getItem("loggedAs") }); if (error) { showMessage('studentsMsg', "Erro: " + error.message, true); } else { showMessage('studentsMsg', data[0].msg); await initializeStudentFilters(); document.querySelector('#studentsPanel .studentsTextarea').value = ""; document.getElementById('studentGradeSelect').value = ""; } });
+        document.getElementById("removeStudentsBtn").addEventListener("click", async () => { const names = document.querySelector('#removeStudentsPanel .studentsTextarea').value.split("\n").map(n => n.trim()).filter(Boolean); if (names.length === 0) return; showMessage('removeStudentsMsg', 'Removendo...'); const { data, error } = await supabase.rpc("remove_students", { p_creator: localStorage.getItem("loggedAs"), p_names: names }); if (error) showMessage('removeStudentsMsg', "Erro: " + error.message, true); else { showMessage('removeStudentsMsg', data[0].msg); await initializeStudentFilters(); } document.querySelector('#removeStudentsPanel .studentsTextarea').value = ""; });
+        document.getElementById('createUserBtn').addEventListener('click', async () => { showMessage('createMsg', 'Criando...'); const { data, error } = await supabase.rpc('create_user', { p_creator: localStorage.getItem("loggedAs"), p_username: document.getElementById('newUser').value.trim(), p_password: document.getElementById('newPass').value, p_role: document.getElementById('newRole').value }); if (error) showMessage('createMsg', "Erro: " + error.message, true); else showMessage('createMsg', data[0].msg); });
+        document.getElementById('confirmRemoveUserBtn').addEventListener('click', async () => { const userToRemove = document.getElementById('userToRemove').value.trim(); const creator = localStorage.getItem("loggedAs"); if (!userToRemove) { showMessage('removeUserMsg', 'Por favor, insira o nome do usuário a ser removido.', true); return; } if (!confirm(`Tem a certeza que deseja remover PERMANENTEMENTE o usuário "${userToRemove}"?`)) { return; } showMessage('removeUserMsg', 'Removendo usuário...'); const { data, error } = await supabase.rpc('remove_user', { p_creator: creator, p_username_to_delete: userToRemove }); if (error) { showMessage('removeUserMsg', `Erro: ${error.message}`, true); } else if (data && data.length > 0) { const result = data[0]; showMessage('removeUserMsg', result.msg, !result.ok); if (result.ok) { document.getElementById('userToRemove').value = ''; } } });
+        document.getElementById('clearListBtn').addEventListener('click', () => { document.getElementById('confirmClearModal').style.display = 'flex'; });
+        document.getElementById('cancelClearActionBtn').addEventListener('click', () => { document.getElementById('confirmClearModal').style.display = 'none'; });
+        document.getElementById('confirmClearActionBtn').addEventListener('click', async () => { showMessage('updateListMsg', 'Limpando...'); document.getElementById('confirmClearModal').style.display = 'none'; const { data, error } = await supabase.rpc('clear_all_data', { p_creator: localStorage.getItem("loggedAs") }); if (error) showMessage('updateListMsg', "Erro: " + error.message, true); else { showMessage('updateListMsg', data[0].msg); await initializeStudentFilters(); } });
+        document.getElementById('exportListBtn').addEventListener('click', async () => { showMessage('updateListMsg', 'Exportando...'); const { data, error } = await supabase.rpc('export_data', { p_creator: localStorage.getItem("loggedAs") }); if (error) { showMessage('updateListMsg', "Erro: " + error.message, true); } else { const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], { type: "application/json" })); a.download = 'lista_alunos.json'; a.click(); URL.revokeObjectURL(a.href); a.remove(); showMessage('updateListMsg', 'Exportado!'); } });
+        document.getElementById('importFile').addEventListener('change', (e) => { const file = e.target.files[0]; if (!file) return; const reader = new FileReader(); reader.onload = async (ev) => { try { showMessage('updateListMsg', 'Importando...'); const { data, error } = await supabase.rpc('import_data', { p_creator: localStorage.getItem("loggedAs"), p_data: JSON.parse(ev.target.result) }); if (error) showMessage('updateListMsg', "Erro: " + error.message, true); else { showMessage('updateListMsg', data[0].msg); await initializeStudentFilters(); } } catch (err) { showMessage('updateListMsg', 'Erro: Arquivo JSON inválido.', true); } }; reader.readAsText(file); e.target.value = ''; });
+
+    </script>
+</body>
+
+</html>

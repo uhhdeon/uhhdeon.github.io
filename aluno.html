@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Aluno</title>
+    <link rel="stylesheet" href="aluno-style.css">
+    <link rel="icon" href="imgs/icon.ico" type="image/x-icon">
+</head>
+<body>
+
+    <div id="loadingOverlay" style="display: flex;">
+        <img src="imgs/loadinggif.gif" alt="Carregando..." />
+    </div>
+
+    <header class="aluno-header">
+        <a href="index.html" class="back-button">&larr; Voltar ao Painel</a>
+    </header>
+
+    <main id="alunoMainContent" style="display: none;">
+        <div class="student-info-card">
+            <h1 id="studentName"></h1>
+            <p id="studentGrade"></p>
+        </div>
+
+        <section class="advertencias-section">
+            <div class="advertencias-header">
+                <h3>Histórico de Advertências</h3>
+                <button id="showAddAdvertenciaModalBtn">
+                    <img src="imgs/adicionaradvertencia.png" alt="Adicionar">
+                    <span>Nova Advertência</span>
+                </button>
+            </div>
+            <div id="advertenciasList">
+                </div>
+        </section>
+    </main>
+    
+    <div id="addAdvertenciaModal" class="modal-overlay" style="display:none;">
+        <div class="modal-content">
+            <h2>Nova Advertência</h2>
+            <textarea id="advertenciaText" placeholder="Descreva a ocorrência..." rows="8"></textarea>
+            <div class="modal-buttons">
+                <button id="saveAdvertenciaBtn">Salvar</button>
+                <button id="cancelAdvertenciaBtn">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+        const supabaseUrl = "https://hjniifmmidnjssbicreg.supabase.co";
+        const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhqbmlpZm1taWRuanNzYmljcmVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY4MzMyMjMsImV4cCI6MjA3MjQwOTIyM30.wzNpczWfngrvqmLaQ3jK7an9U1AoCF-sDdCimd8WVBw";
+        const supabase = createClient(supabaseUrl, supabaseKey);
+
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        const mainContent = document.getElementById('alunoMainContent');
+        const studentNameEl = document.getElementById('studentName');
+        const studentGradeEl = document.getElementById('studentGrade');
+        const advertenciasListEl = document.getElementById('advertenciasList');
+        const addAdvertenciaModal = document.getElementById('addAdvertenciaModal');
+        
+        let currentStudentId = null;
+        const loggedUser = localStorage.getItem('loggedAs');
+        const loggedRole = localStorage.getItem('loggedRole');
+
+        if (!loggedUser) { window.location.href = 'index.html'; }
+
+        function formatDate(isoString) {
+            if (!isoString) return 'Data indisponível';
+            return new Date(isoString).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' });
+        }
+
+        function createAdvertenciaCard(adv) {
+            const card = document.createElement('div');
+            card.className = 'advertencia-card';
+            card.dataset.id = adv.id;
+            card.innerHTML = `
+                <p class="adv-description">${adv.description}</p>
+                <div class="adv-footer">
+                    <span class="adv-date">Lançado por: <b>${adv.created_by || 'N/A'}</b> em ${formatDate(adv.created_at)}</span>
+                    <div class="adv-actions">
+                        <div class="kebab-menu">&#8942;
+                            <div class="kebab-dropdown">
+                                <a href="#" class="delete-btn">Excluir</a>
+                                <a href="#" class="generate-fo-btn">Gerar F.O Negativo</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+            
+            // Lógica para o botão Excluir
+            card.querySelector('.delete-btn').addEventListener('click', async (e) => {
+                e.preventDefault();
+                if (confirm('Tem certeza que deseja excluir esta advertência?')) {
+                    const { error } = await supabase.rpc('delete_advertencia', { p_creator: loggedUser, p_advertencia_id: adv.id });
+                    if (error) { alert('Erro ao excluir: ' + error.message); }
+                    else { card.remove(); }
+                }
+            });
+
+            // LÓGICA ATUALIZADA para o botão Gerar F.O Negativo
+            card.querySelector('.generate-fo-btn').addEventListener('click', (e) => {
+                e.preventDefault();
+
+                // 1. Coleta os dados
+                const alunoNome = studentNameEl.textContent;
+                const alunoSerie = studentGradeEl.textContent;
+                const advertenciaDesc = adv.description;
+                const advertenciaData = new Date(adv.created_at).toLocaleDateString('pt-BR');
+
+                // 2. Monta a URL com os parâmetros
+                const urlParams = new URLSearchParams({
+                    aluno: alunoNome,
+                    serie: alunoSerie,
+                    data: advertenciaData,
+                    descricao: advertenciaDesc,
+                    aplicante: loggedUser,
+                    cargo: loggedRole
+                });
+
+                const url = `comunicado.html?${urlParams.toString()}`;
+
+                // 3. Abre em uma nova aba
+                window.open(url, '_blank');
+            });
+
+            return card;
+        }
+
+        async function fetchAndRenderData() {
+            const params = new URLSearchParams(window.location.search);
+            const studentName = params.get('nome');
+
+            if (!studentName) {
+                mainContent.innerHTML = '<h1>Aluno não especificado. Volte e selecione um aluno.</h1>';
+            } else {
+                 const { data, error } = await supabase.rpc('get_student_details', { p_student_name: studentName });
+                if (error || !data) {
+                    mainContent.innerHTML = `<h1>Erro ao buscar dados do aluno: ${studentName}</h1><p>${error?.message || 'Aluno não encontrado.'}</p>`;
+                } else {
+                    currentStudentId = data.id;
+                    studentNameEl.textContent = data.name;
+                    studentGradeEl.textContent = data.grade || 'Série não informada';
+                    advertenciasListEl.innerHTML = '';
+                    if (data.advertencias && data.advertencias.length > 0) {
+                        data.advertencias.forEach(adv => advertenciasListEl.appendChild(createAdvertenciaCard(adv)));
+                    } else {
+                        advertenciasListEl.innerHTML = '<p class="no-advertencias">Este aluno não possui advertências.</p>';
+                    }
+                }
+            }
+            loadingOverlay.style.display = 'none';
+            mainContent.style.display = 'block';
+        }
+
+        document.getElementById('showAddAdvertenciaModalBtn').addEventListener('click', () => addAdvertenciaModal.style.display = 'flex');
+        document.getElementById('cancelAdvertenciaBtn').addEventListener('click', () => addAdvertenciaModal.style.display = 'none');
+        document.getElementById('saveAdvertenciaBtn').addEventListener('click', async () => {
+            const description = document.getElementById('advertenciaText').value.trim();
+            if (!description) { alert('A descrição não pode estar vazia.'); return; }
+            
+            const { data, error } = await supabase.rpc('add_advertencia', { p_creator: loggedUser, p_student_id: currentStudentId, p_description: description });
+
+            if (error || !data[0].ok) {
+                alert('Erro ao salvar: ' + (error?.message || data[0].msg));
+            } else {
+                const noAdvMsg = advertenciasListEl.querySelector('.no-advertencias');
+                if(noAdvMsg) noAdvMsg.remove();
+                
+                const newCard = createAdvertenciaCard(data[0].new_adv);
+                advertenciasListEl.prepend(newCard);
+                document.getElementById('advertenciaText').value = '';
+                addAdvertenciaModal.style.display = 'none';
+            }
+        });
+
+        fetchAndRenderData();
+    </script>
+</body>
+</html>

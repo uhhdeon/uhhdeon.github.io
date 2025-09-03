@@ -1,0 +1,41 @@
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+body { background-color: #0d1117; color: #c0c0a0; }
+
+#loadingOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); display: flex; justify-content: center; align-items: center; z-index: 2000; }
+#loadingOverlay img { max-width: 100px; }
+
+.aluno-header { background-color: #111826; padding: 15px 30px; display: flex; align-items: center; border-bottom: 2px solid #5a5f3c; }
+.back-button { color: #c0c0a0; text-decoration: none; font-weight: bold; }
+.back-button:hover { text-decoration: underline; }
+
+#alunoMainContent { max-width: 900px; margin: 30px auto; padding: 0 20px; }
+.student-info-card { background-color: #111826; padding: 20px; border-radius: 8px; border: 1px solid #5a5f3c; margin-bottom: 30px; }
+#studentName { font-size: 2em; color: #fff; margin-bottom: 5px; }
+#studentGrade { font-size: 1.2em; color: #9abf8f; }
+
+.advertencias-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 2px solid #5a5f3c; padding-bottom: 10px; }
+.advertencias-header h3 { font-size: 1.5em; }
+#showAddAdvertenciaModalBtn { background-color: #9abf8f; color: #0d1117; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; display: flex; align-items: center; gap: 8px; transition: background-color 0.2s; }
+#showAddAdvertenciaModalBtn:hover { background-color: #7a8f5f; color: #fff; }
+#showAddAdvertenciaModalBtn img { width: 20px; height: 20px; }
+
+.advertencia-card { background-color: #161b22; padding: 15px; border-radius: 6px; border-left: 4px solid #7a8f5f; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.3); }
+.adv-description { font-size: 1.1em; line-height: 1.6; margin-bottom: 10px; white-space: pre-wrap; }
+.adv-footer { display: flex; justify-content: space-between; align-items: center; font-size: 0.9em; color: #888; }
+p.no-advertencias { text-align: center; padding: 40px; background-color: #161b22; border-radius: 6px; font-style: italic; }
+
+.adv-actions .kebab-menu { position: relative; cursor: pointer; font-size: 1.5em; padding: 0 10px; user-select: none; }
+.adv-actions .kebab-dropdown { display: none; position: absolute; right: 0; top: 100%; background-color: #1c1f2b; border: 1px solid #5a5f3c; border-radius: 4px; min-width: 180px; z-index: 10; box-shadow: 0 3px 8px rgba(0,0,0,0.5); }
+.kebab-menu:hover .kebab-dropdown { display: block; }
+.kebab-dropdown a { display: block; padding: 10px 15px; color: #c0c0a0; text-decoration: none; }
+.kebab-dropdown a:hover { background-color: #5a5f3c; color: #fff; }
+.kebab-dropdown a[disabled] { color: #666; cursor: not-allowed; background-color: transparent !important; }
+
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); display: flex; justify-content: center; align-items: center; z-index: 1000; }
+.modal-content { background-color: #1c1f2b; padding: 30px; border-radius: 8px; border: 1px solid #5a5f3c; width: 500px; }
+.modal-content h2 { text-align: center; color: #9abf8f; margin-bottom: 20px; }
+.modal-content textarea { width: 100%; padding: 10px; background-color: #0d1117; color: #c0c0a0; border: 1px solid #5a5f3c; border-radius: 4px; resize: vertical; }
+.modal-buttons { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
+.modal-buttons button { padding: 10px 20px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; }
+#saveAdvertenciaBtn { background-color: #9abf8f; color: #0d1117; }
+#cancelAdvertenciaBtn { background-color: #555; color: white; }

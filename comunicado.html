@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comunicado de Faltas Disciplinares</title>
+    <link rel="stylesheet" href="comunicado-style.css">
+    <link rel="icon" href="imgs/icon.ico" type="image/x-icon">
+</head>
+<body>
+
+    <div class="container">
+        
+        <header class="page-header">
+            <div class="logo">
+                <img src="imgs/logoNRE.png" alt="Logo NRE Umuarama">
+            </div>
+            <div class="school-info">
+                <strong>COLÉGIO ESTADUAL CÍVICO-MILITAR</strong><br>
+                DOURADINA
+            </div>
+            <div class="logo">
+                <img src="imgs/logoCCMD.png" alt="Logo Colégio Cívico-Militar">
+            </div>
+        </header>
+
+        <main class="page-content">
+            <h2>COMUNICAÇÃO DE FALTAS<br>COMPORTAMENTAIS E ATITUDINAIS</h2>
+
+            <p>
+                Sr(a) RESPONSÁVEL pelo aluno <strong contenteditable="true" id="aluno-nome">(Nome do Aluno)</strong>, Série <strong contenteditable="true" id="aluno-serie">(Série)</strong>
+                COMUNICAMOS que em data de <strong contenteditable="true" id="comunicado-data">(Data)</strong> o aluno cometeu a seguinte falta disciplinar:
+            </p>
+
+            <blockquote contenteditable="true" id="comunicado-descricao">
+                (Descrição da ocorrência)
+            </blockquote>
+
+            <p>
+                Assim, o aluno contrariou Normas de Condutas e Atitudes, as quais já foram devidamentes
+                divulgadas и cujo aluno já foi orientado sobre as mesmas, em caso de nova reincidência o aluno
+                poderá sofrer <u>MEDIDA DISCIPLINAR</u> e ter pontos descontados de sua NOTA de
+                comportamento, além de outras medidas conforme regimento escolar e Manual de normas de
+                condutas e atitudes dos Colégios Cívicos-Militares, 4°Edição.
+            </p>
+
+            <p class="warning">
+                <u>O ALUNO DEVERÁ DEVOLVER ESSE COMUNICADO ASSINADO PELO RESPONSÁVEL, com JUSTIFICATIVA, SE HOUVER.</u>
+            </p>
+            
+            <div class="justification">
+                <h3>JUSTIFICATIVA DO RESPONSÁVEL / RAZÃO DE DEFESA</h3>
+                <hr><hr><hr><hr>
+            </div>
+            
+            <div class="signature-area">
+                <div class="date-field">
+                    DATA _____ / _____ / 2025
+                </div>
+                <div class="signature-field">
+                    <hr>
+                    RESPONSÁVEL<br>
+                    Nome Completo e assinatura.
+                </div>
+            </div>
+        </main>
+
+        <footer class="page-footer">
+            <strong contenteditable="true" id="aplicante-nome">(Nome do Aplicante)</strong>, RG: <strong contenteditable="true">(RG do Aplicante)</strong><br>
+            <span contenteditable="true" id="aplicante-cargo">(Cargo)</span>
+        </footer>
+
+    </div>
+
+    <button id="print-btn">Imprimir / Salvar como PDF</button>
+
+    <script src="comunicado-script.js"></script>
+</body>
+</html>

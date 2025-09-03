@@ -1,0 +1,585 @@
+/* ==================== RESET E ESTILOS GERAIS ==================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #0d1117; /* Quase preto */
+    color: #c0c0a0; /* Verde-morto claro */
+}
+
+/* ==================== TELA DE LOGIN ==================== */
+#loginScreen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+#logo-login {
+    max-width: 300px;
+    margin-bottom: 30px;
+}
+
+#loginDiv {
+    background-color: #111826; /* Azul escuro */
+    padding: 30px 40px;
+    border: 2px solid #5a5f3c; /* Verde-morto escuro */
+    border-radius: 6px;
+    width: 320px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#loginDiv input {
+    width: 100%;
+    padding: 10px;
+    margin: 6px 0;
+    border: 1px solid #5a5f3c;
+    border-radius: 3px;
+    background-color: #1c1f2b;
+    color: #c0c0a0;
+    font-size: 14px;
+}
+
+#loginDiv button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #5a5f3c;
+    color: #c0c0a0;
+    font-weight: bold;
+    border: 1px solid #9abf8f;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#loginDiv button:hover {
+    background-color: #7a8f5f;
+    color: #ffffff;
+}
+
+#msg {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+    min-height: 20px;
+}
+
+/* ==================== TELA LOGADA ==================== */
+#loggedScreen {
+    display: none; /* Começa escondida */
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+}
+
+/* --- Barra de Menu Superior --- */
+#menuBar {
+    width: 100%;
+    background-color: #111826;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom: 2px solid #5a5f3c;
+    padding: 0 20px;
+    flex-shrink: 0;
+}
+
+.menuItem {
+    position: relative;
+    padding: 10px 15px;
+    cursor: pointer;
+    color: #c0c0a0;
+    font-weight: bold;
+    user-select: none; /* Impede seleção de texto */
+    transition: background-color 0.2s;
+}
+
+.menuItem:hover {
+    background-color: #1c1f2b;
+    border-radius: 3px;
+}
+
+.menuItem[disabled] {
+    color: #666;
+    cursor: not-allowed;
+}
+.menuItem[disabled]:hover {
+    background-color: transparent;
+}
+
+/* --- Menu Dropdown --- */
+.dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #161b2a;
+    border: 1px solid #5a5f3c;
+    border-radius: 4px;
+    min-width: 200px;
+    z-index: 100;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    padding: 5px 0;
+}
+
+.dropdown button {
+    width: 100%;
+    padding: 10px 15px;
+    border: none;
+    background: none;
+    color: #c0c0a0;
+    text-align: left;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.dropdown button:hover {
+    background-color: #5a5f3c;
+    color: #ffffff;
+}
+
+.dropdown button[disabled] {
+    color: #666;
+    cursor: not-allowed;
+}
+
+.dropdown button[disabled]:hover {
+    background: none;
+}
+
+#logoutBtn {
+    margin-left: auto; /* Joga o botão para a direita */
+    padding: 8px 15px;
+    background-color: #9abf8f;
+    color: #0d1117;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#logoutBtn:hover {
+    background-color: #7a8f5f;
+    color: white;
+}
+
+/* --- Conteúdo Principal --- */
+#mainContent {
+    flex-grow: 1; /* Ocupa todo o espaço restante */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* Contexto para posicionar os painéis */
+    overflow: hidden;
+}
+
+#logo-logged {
+    max-width: 500px;
+    opacity: 0.1; /* Deixa o logo mais sutil */
+}
+
+/* --- Painéis (agora como pop-ups) --- */
+.panel {
+    display: none; /* Começam escondidos */
+    flex-direction: column;
+    position: absolute;
+    width: 400px;
+    background-color: #111826;
+    padding: 25px;
+    border: 2px solid #5a5f3c;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    z-index: 50;
+}
+
+.panel h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.2em;
+    color: #9abf8f;
+}
+
+.panel input, .panel select, .panel textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    border: 1px solid #5a5f3c;
+    background-color: #1c1f2b;
+    color: #c0c0a0;
+    font-family: 'Consolas', monospace;
+}
+
+.panel button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    border: 1px solid #9abf8f;
+    background-color: #5a5f3c;
+    color: #c0c0a0;
+    border-radius: 3px;
+    transition: background-color 0.2s;
+}
+
+.panel button:hover {
+    background-color: #7a8f5f;
+    color: #ffffff;
+}
+
+.panel .closePanelBtn {
+    background-color: #333;
+    border-color: #555;
+}
+
+.panel .closePanelBtn:hover {
+    background-color: #444;
+}
+
+.panel p { /* Mensagens de status */
+    margin-top: 15px;
+    text-align: center;
+    min-height: 20px;
+}
+
+
+/* ==================== RODAPÉ ==================== */
+footer {
+    padding: 10px;
+    font-size: 12px;
+    color: rgba(192, 192, 160, 0.3);
+    text-align: center;
+    width: 100%;
+    flex-shrink: 0; /* Impede que o rodapé encolha */
+}
+
+/* ==================== RESET E ESTILOS GERAIS ==================== */
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+body { height: 100vh; display: flex; flex-direction: column; background-color: #0d1117; color: #c0c0a0; }
+
+/* ==================== TELA DE LOGIN ==================== */
+#loginScreen { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; }
+#logo-login { max-width: 300px; margin-bottom: 30px; }
+#loginDiv { background-color: #111826; padding: 30px 40px; border: 2px solid #5a5f3c; border-radius: 6px; width: 320px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.7); display: flex; flex-direction: column; align-items: center; }
+#loginDiv input { width: 100%; padding: 10px; margin: 6px 0; border: 1px solid #5a5f3c; border-radius: 3px; background-color: #1c1f2b; color: #c0c0a0; font-size: 14px; }
+#loginDiv button { width: 100%; padding: 10px; margin-top: 10px; background-color: #5a5f3c; color: #c0c0a0; font-weight: bold; border: 1px solid #9abf8f; border-radius: 3px; cursor: pointer; transition: all 0.2s ease; }
+#loginDiv button:hover { background-color: #7a8f5f; color: #ffffff; }
+#msg { text-align: center; margin-top: 15px; font-size: 14px; min-height: 20px; }
+
+/* ==================== TELA LOGADA ==================== */
+#loggedScreen { display: none; flex-direction: column; height: 100vh; width: 100%; }
+#menuBar { width: 100%; background-color: #111826; display: flex; align-items: center; border-bottom: 2px solid #5a5f3c; padding: 0 20px; flex-shrink: 0; }
+.menuItem { position: relative; padding: 10px 15px; cursor: pointer; color: #c0c0a0; font-weight: bold; user-select: none; transition: background-color 0.2s; }
+.menuItem:hover { background-color: #1c1f2b; border-radius: 3px; }
+.menuItem[disabled] { color: #666; cursor: not-allowed; }
+.menuItem[disabled]:hover { background-color: transparent; }
+.dropdown { display: none; position: absolute; top: 100%; left: 0; background-color: #161b2a; border: 1px solid #5a5f3c; border-radius: 4px; min-width: 200px; z-index: 100; box-shadow: 0 4px 10px rgba(0,0,0,0.5); padding: 5px 0; }
+.dropdown button { width: 100%; padding: 10px 15px; border: none; background: none; color: #c0c0a0; text-align: left; cursor: pointer; font-size: 14px; }
+.dropdown button:hover { background-color: #5a5f3c; color: #ffffff; }
+#logoutBtn { margin-left: auto; padding: 8px 15px; background-color: #9abf8f; color: #0d1117; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; transition: background-color 0.2s; }
+#logoutBtn:hover { background-color: #7a8f5f; color: white; }
+#mainContent { flex-grow: 1; display: flex; justify-content: center; align-items: center; position: relative; overflow: hidden; }
+#logo-logged { max-width: 500px; opacity: 0.1; }
+
+/* --- Painéis --- */
+.panel { display: none; flex-direction: column; position: absolute; width: 450px; background-color: #111826; padding: 25px; border: 2px solid #5a5f3c; border-radius: 8px; box-shadow: 0 0 20px rgba(0, 0, 0, 0.7); z-index: 50; }
+.panel h3 { text-align: center; margin-bottom: 20px; font-size: 1.2em; color: #9abf8f; }
+.panel input, .panel select, .panel textarea { width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 3px; border: 1px solid #5a5f3c; background-color: #1c1f2b; color: #c0c0a0; font-family: 'Consolas', monospace; }
+.panel button { width: 100%; padding: 10px; margin-top: 10px; font-weight: bold; cursor: pointer; border: 1px solid #9abf8f; background-color: #5a5f3c; color: #c0c0a0; border-radius: 3px; transition: background-color 0.2s; }
+.panel button:hover { background-color: #7a8f5f; color: #ffffff; }
+.panel .closePanelBtn { background-color: #333; border-color: #555; }
+.panel .closePanelBtn:hover { background-color: #444; }
+.panel .panelMsg { margin-top: 15px; text-align: center; min-height: 20px; color: #9abf8f; }
+.panel textarea { resize: vertical; }
+
+/* Estilo para o botão de upload de arquivo */
+.file-label { display: block; width: 100%; padding: 10px; margin-top: 10px; font-weight: bold; cursor: pointer; border: 1px solid #9abf8f; background-color: #5a5f3c; color: #c0c0a0; border-radius: 3px; text-align: center; transition: background-color 0.2s; }
+.file-label:hover { background-color: #7a8f5f; color: #ffffff; }
+input[type="file"] { display: none; }
+
+/* ==================== MODAL DE CONFIRMAÇÃO ==================== */
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.85); display: flex; justify-content: center; align-items: center; z-index: 1000; }
+.modal-content { background-color: #1c1f2b; padding: 40px; border-radius: 10px; border: 3px solid #ff5555; text-align: center; max-width: 600px; box-shadow: 0 0 30px rgba(255, 0, 0, 0.5); }
+.modal-content h2 { color: #ff5555; font-size: 2em; margin-bottom: 20px; text-transform: uppercase; }
+.modal-content p { color: #f0c0c0; font-size: 1.2em; line-height: 1.6; margin-bottom: 30px; }
+.modal-buttons { display: flex; justify-content: center; gap: 20px; }
+.modal-buttons button { padding: 12px 25px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; transition: all 0.2s; }
+#confirmClearActionBtn { background-color: #d93434; color: white; }
+#confirmClearActionBtn:hover { background-color: #ff5555; }
+#cancelClearActionBtn { background-color: #555; color: white; }
+#cancelClearActionBtn:hover { background-color: #777; }
+
+/* ==================== RODAPÉ ==================== */
+footer { padding: 10px; font-size: 12px; color: rgba(192, 192, 160, 0.3); text-align: center; width: 100%; flex-shrink: 0; }
+
+/* ==================== RESET E ESTILOS GERAIS ==================== */
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+body { height: 100vh; display: flex; flex-direction: column; background-color: #0d1117; color: #c0c0a0; }
+
+/* ==================== TELA DE LOGIN ==================== */
+#loginScreen { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; }
+#logo-login { max-width: 300px; margin-bottom: 30px; }
+#loginDiv { background-color: #111826; padding: 30px 40px; border: 2px solid #5a5f3c; border-radius: 6px; width: 320px; box-shadow: 0 0 15px rgba(0,0,0,0.7); display: flex; flex-direction: column; }
+#loginDiv input { width: 100%; padding: 10px; margin: 6px 0; border: 1px solid #5a5f3c; border-radius: 3px; background-color: #1c1f2b; color: #c0c0a0; font-size: 14px; }
+#loginDiv button { width: 100%; padding: 10px; margin-top: 10px; background-color: #5a5f3c; color: #c0c0a0; font-weight: bold; border: 1px solid #9abf8f; border-radius: 3px; cursor: pointer; transition: all 0.2s ease; }
+#loginDiv button:hover { background-color: #7a8f5f; color: #ffffff; }
+#msg { text-align: center; margin-top: 15px; font-size: 14px; min-height: 20px; }
+
+/* ==================== TELA LOGADA ==================== */
+#loggedScreen { display: none; flex-direction: column; height: 100vh; width: 100%; }
+#menuBar { width: 100%; background-color: #111826; display: flex; align-items: center; border-bottom: 2px solid #5a5f3c; padding: 0 20px; flex-shrink: 0; }
+.menuItem { position: relative; padding: 10px 15px; cursor: pointer; color: #c0c0a0; font-weight: bold; user-select: none; transition: background-color 0.2s; }
+.menuItem:hover { background-color: #1c1f2b; }
+.menuItem[disabled] { color: #666; cursor: not-allowed; }
+.dropdown { display: none; position: absolute; top: 100%; left: 0; background-color: #161b2a; border: 1px solid #5a5f3c; border-radius: 4px; min-width: 220px; z-index: 100; box-shadow: 0 4px 10px rgba(0,0,0,0.5); padding: 5px 0; }
+.dropdown button { width: 100%; padding: 10px 15px; border: none; background: none; color: #c0c0a0; text-align: left; cursor: pointer; font-size: 14px; }
+.dropdown button:hover { background-color: #5a5f3c; color: #ffffff; }
+#logoutBtn { margin-left: auto; padding: 8px 15px; background-color: #9abf8f; color: #0d1117; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; }
+#logoutBtn:hover { background-color: #7a8f5f; color: white; }
+#mainContent { flex-grow: 1; display: flex; justify-content: center; align-items: center; position: relative; overflow: hidden; }
+#logo-logged { max-width: 500px; opacity: 0.1; }
+
+/* --- PAINÉIS --- */
+.panel { display: none; flex-direction: column; position: absolute; width: 450px; background-color: #111826; padding: 25px; border: 2px solid #5a5f3c; border-radius: 8px; box-shadow: 0 0 20px rgba(0,0,0,0.7); z-index: 50; }
+.panel h3 { text-align: center; margin-bottom: 10px; font-size: 1.2em; color: #9abf8f; }
+.panel p { text-align: center; margin-bottom: 15px; font-size: 0.9em; color: #888; }
+.panel input, .panel select, .panel textarea { width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 3px; border: 1px solid #5a5f3c; background-color: #1c1f2b; color: #c0c0a0; }
+.panel button { width: 100%; padding: 10px; margin-top: 10px; font-weight: bold; cursor: pointer; border: 1px solid #9abf8f; background-color: #5a5f3c; color: #c0c0a0; border-radius: 3px; transition: background-color 0.2s; }
+.panel button:hover { background-color: #7a8f5f; color: #ffffff; }
+.panel .closePanelBtn { background-color: #333; border-color: #555; margin-top: 15px; }
+.panel .panelMsg { margin-top: 15px; text-align: center; min-height: 20px; color: #9abf8f; font-size: 0.9em; }
+.file-label { display: block; text-align: center; width: 100%; padding: 10px; margin-top: 10px; font-weight: bold; cursor: pointer; border: 1px solid #9abf8f; background-color: #5a5f3c; color: #c0c0a0; border-radius: 3px; }
+input[type="file"] { display: none; }
+
+/* --- MODAL DE CONFIRMAÇÃO --- */
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); display: flex; justify-content: center; align-items: center; z-index: 1000; }
+.modal-content { background-color: #1c1f2b; padding: 40px; border-radius: 10px; border: 3px solid #ff5555; text-align: center; max-width: 600px; box-shadow: 0 0 30px rgba(255,0,0,0.5); }
+.modal-content h2 { color: #ff5555; font-size: 1.5em; margin-bottom: 20px; }
+.modal-content p { color: #f0c0c0; line-height: 1.6; margin-bottom: 30px; }
+.modal-buttons { display: flex; justify-content: center; gap: 20px; }
+.modal-buttons button { padding: 12px 25px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; }
+#confirmClearActionBtn { background-color: #d93434; color: white; }
+#cancelClearActionBtn { background-color: #555; color: white; }
+
+/* --- OVERLAY DE CARREGAMENTO --- */
+#loadingOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); display: flex; justify-content: center; align-items: center; z-index: 2000; }
+#loadingOverlay img { max-width: 100px; }
+
+/* --- RODAPÉ --- */
+footer { padding: 15px; font-size: 12px; color: rgba(192,192,160,0.3); text-align: center; width: 100%; flex-shrink: 0; margin-top: auto; }
+
+/* ==================== RESET E ESTILOS GERAIS ==================== */
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+body { height: 100vh; display: flex; flex-direction: column; background-color: #0d1117; color: #c0c0a0; }
+
+/* ==================== TELA DE LOGIN ==================== */
+#loginScreen { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; }
+#logo-login { max-width: 300px; margin-bottom: 30px; }
+#loginDiv { background-color: #111826; padding: 30px 40px; border: 2px solid #5a5f3c; border-radius: 6px; width: 320px; box-shadow: 0 0 15px rgba(0,0,0,0.7); display: flex; flex-direction: column; }
+#loginDiv input { width: 100%; padding: 10px; margin: 6px 0; border: 1px solid #5a5f3c; border-radius: 3px; background-color: #1c1f2b; color: #c0c0a0; font-size: 14px; }
+#loginDiv button { width: 100%; padding: 10px; margin-top: 10px; background-color: #5a5f3c; color: #c0c0a0; font-weight: bold; border: 1px solid #9abf8f; border-radius: 3px; cursor: pointer; transition: all 0.2s ease; }
+#loginDiv button:hover { background-color: #7a8f5f; color: #ffffff; }
+#msg { text-align: center; margin-top: 15px; font-size: 14px; min-height: 20px; }
+
+/* ==================== TELA LOGADA ==================== */
+#loggedScreen { display: none; flex-direction: column; height: 100vh; width: 100%; }
+#menuBar { width: 100%; background-color: #111826; display: flex; align-items: center; border-bottom: 2px solid #5a5f3c; padding: 0 20px; flex-shrink: 0; }
+.menuItem { position: relative; padding: 10px 15px; cursor: pointer; color: #c0c0a0; font-weight: bold; user-select: none; transition: background-color 0.2s; }
+.menuItem:hover { background-color: #1c1f2b; }
+.menuItem[disabled] { color: #666; cursor: not-allowed; }
+.dropdown { display: none; position: absolute; top: 100%; left: 0; background-color: #161b2a; border: 1px solid #5a5f3c; border-radius: 4px; min-width: 220px; z-index: 100; box-shadow: 0 4px 10px rgba(0,0,0,0.5); padding: 5px 0; }
+.dropdown button { width: 100%; padding: 10px 15px; border: none; background: none; color: #c0c0a0; text-align: left; cursor: pointer; font-size: 14px; }
+.dropdown button:hover { background-color: #5a5f3c; color: #ffffff; }
+#logoutBtn { margin-left: auto; padding: 8px 15px; background-color: #9abf8f; color: #0d1117; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; }
+#logoutBtn:hover { background-color: #7a8f5f; color: white; }
+#mainContent { flex-grow: 1; display: flex; justify-content: center; align-items: center; position: relative; overflow: hidden; }
+#logo-logged { max-width: 500px; opacity: 0.1; }
+
+/* --- PAINÉIS --- */
+.panel { display: none; flex-direction: column; position: absolute; width: 450px; background-color: #111826; padding: 25px; border: 2px solid #5a5f3c; border-radius: 8px; box-shadow: 0 0 20px rgba(0,0,0,0.7); z-index: 50; }
+.panel h3 { text-align: center; margin-bottom: 10px; font-size: 1.2em; color: #9abf8f; }
+.panel p { text-align: center; margin-bottom: 15px; font-size: 0.9em; color: #888; }
+/* NOVO ESTILO */
+.panel-label { display: block; text-align: left; margin-bottom: 5px; font-size: 0.9em; color: #aaa; }
+.panel input, .panel select, .panel textarea { width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 3px; border: 1px solid #5a5f3c; background-color: #1c1f2b; color: #c0c0a0; }
+.panel button { width: 100%; padding: 10px; margin-top: 10px; font-weight: bold; cursor: pointer; border: 1px solid #9abf8f; background-color: #5a5f3c; color: #c0c0a0; border-radius: 3px; transition: background-color 0.2s; }
+.panel button:hover { background-color: #7a8f5f; color: #ffffff; }
+.panel .closePanelBtn { background-color: #333; border-color: #555; margin-top: 15px; }
+.panel .panelMsg { margin-top: 15px; text-align: center; min-height: 20px; color: #9abf8f; font-size: 0.9em; }
+.file-label { display: block; text-align: center; width: 100%; padding: 10px; margin-top: 10px; font-weight: bold; cursor: pointer; border: 1px solid #9abf8f; background-color: #5a5f3c; color: #c0c0a0; border-radius: 3px; }
+input[type="file"] { display: none; }
+
+/* --- MODAL DE CONFIRMAÇÃO --- */
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); display: flex; justify-content: center; align-items: center; z-index: 1000; }
+.modal-content { background-color: #1c1f2b; padding: 40px; border-radius: 10px; border: 3px solid #ff5555; text-align: center; max-width: 600px; box-shadow: 0 0 30px rgba(255,0,0,0.5); }
+.modal-content h2 { color: #ff5555; font-size: 1.5em; margin-bottom: 20px; }
+.modal-content p { color: #f0c0c0; line-height: 1.6; margin-bottom: 30px; }
+.modal-buttons { display: flex; justify-content: center; gap: 20px; }
+.modal-buttons button { padding: 12px 25px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; }
+#confirmClearActionBtn { background-color: #d93434; color: white; }
+#cancelClearActionBtn { background-color: #555; color: white; }
+
+/* --- OVERLAY DE CARREGAMENTO --- */
+#loadingOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); display: flex; justify-content: center; align-items: center; z-index: 2000; }
+#loadingOverlay img { max-width: 100px; }
+
+/* --- RODAPÉ --- */
+footer { padding: 15px; font-size: 12px; color: rgba(192,192,160,0.3); text-align: center; width: 100%; flex-shrink: 0; margin-top: auto; }
+
+/* ==================== RESET E ESTILOS GERAIS ==================== */
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+body { height: 100vh; display: flex; flex-direction: column; background-color: #0d1117; color: #c0c0a0; }
+
+/* ==================== TELA DE LOGIN ==================== */
+#loginScreen { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; }
+#logo-login { max-width: 300px; margin-bottom: 30px; }
+#loginDiv { background-color: #111826; padding: 30px 40px; border: 2px solid #5a5f3c; border-radius: 6px; width: 320px; box-shadow: 0 0 15px rgba(0,0,0,0.7); display: flex; flex-direction: column; }
+#loginDiv input { width: 100%; padding: 10px; margin: 6px 0; border: 1px solid #5a5f3c; border-radius: 3px; background-color: #1c1f2b; color: #c0c0a0; font-size: 14px; }
+#loginDiv button { width: 100%; padding: 10px; margin-top: 10px; background-color: #5a5f3c; color: #c0c0a0; font-weight: bold; border: 1px solid #9abf8f; border-radius: 3px; cursor: pointer; transition: all 0.2s ease; }
+#loginDiv button:hover { background-color: #7a8f5f; color: #ffffff; }
+#msg { text-align: center; margin-top: 15px; font-size: 14px; min-height: 20px; }
+
+/* ==================== TELA LOGADA ==================== */
+#loggedScreen { display: none; flex-direction: column; height: 100vh; width: 100%; }
+#menuBar { width: 100%; background-color: #111826; display: flex; align-items: center; border-bottom: 2px solid #5a5f3c; padding: 0 20px; flex-shrink: 0; }
+.menuItem { position: relative; padding: 10px 15px; cursor: pointer; color: #c0c0a0; font-weight: bold; user-select: none; transition: background-color 0.2s; }
+.menuItem:hover { background-color: #1c1f2b; }
+.menuItem[disabled] { color: #666; cursor: not-allowed; }
+.dropdown { display: none; position: absolute; top: 100%; left: 0; background-color: #161b2a; border: 1px solid #5a5f3c; border-radius: 4px; min-width: 220px; z-index: 100; box-shadow: 0 4px 10px rgba(0,0,0,0.5); padding: 5px 0; }
+.dropdown button { width: 100%; padding: 10px 15px; border: none; background: none; color: #c0c0a0; text-align: left; cursor: pointer; font-size: 14px; }
+.dropdown button:hover { background-color: #5a5f3c; color: #ffffff; }
+#logoutBtn { margin-left: auto; padding: 8px 15px; background-color: #9abf8f; color: #0d1117; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; }
+#logoutBtn:hover { background-color: #7a8f5f; color: white; }
+#mainContent { flex-grow: 1; display: flex; justify-content: center; align-items: center; position: relative; overflow: hidden; }
+#logo-logged { max-width: 500px; opacity: 0.1; }
+
+/* --- PAINÉIS --- */
+.panel { display: none; flex-direction: column; position: absolute; width: 480px; /* Aumentado */ max-height: 80vh; background-color: #111826; padding: 25px; border: 2px solid #5a5f3c; border-radius: 8px; box-shadow: 0 0 20px rgba(0,0,0,0.7); z-index: 50; }
+.panel h3 { text-align: center; margin-bottom: 10px; font-size: 1.2em; color: #9abf8f; }
+.panel p { text-align: center; margin-bottom: 15px; font-size: 0.9em; color: #888; }
+.panel-label { display: block; text-align: left; margin-bottom: 5px; font-size: 0.9em; color: #aaa; }
+.panel input, .panel select, .panel textarea { width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 3px; border: 1px solid #5a5f3c; background-color: #1c1f2b; color: #c0c0a0; }
+.panel button { width: 100%; padding: 10px; margin-top: 10px; font-weight: bold; cursor: pointer; border: 1px solid #9abf8f; background-color: #5a5f3c; color: #c0c0a0; border-radius: 3px; transition: background-color 0.2s; }
+.panel button:hover { background-color: #7a8f5f; color: #ffffff; }
+.panel .closePanelBtn { background-color: #333; border-color: #555; margin-top: 15px; }
+.panel .panelMsg { margin-top: 15px; text-align: center; min-height: 20px; color: #9abf8f; font-size: 0.9em; }
+.file-label { display: block; text-align: center; width: 100%; padding: 10px; margin-top: 10px; font-weight: bold; cursor: pointer; border: 1px solid #9abf8f; background-color: #5a5f3c; color: #c0c0a0; border-radius: 3px; }
+input[type="file"] { display: none; }
+
+/* --- NOVOS ESTILOS PARA FILTROS --- */
+.filter-group { display: flex; gap: 10px; width: 100%; }
+.filter-group select { flex-grow: 1; }
+#studentSearchFilter { margin-top: 5px; }
+#studentListContainer {
+    margin-top: 15px;
+    background-color: #0d1117;
+    border: 1px solid #5a5f3c;
+    border-radius: 4px;
+    height: 250px;
+    overflow-y: auto;
+    padding: 5px;
+}
+.student-item, .student-item-none {
+    padding: 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    border-bottom: 1px solid #1c1f2b;
+}
+.student-item:last-child { border-bottom: none; }
+.student-item:hover { background-color: #5a5f3c; color: #fff; }
+.student-item-none { cursor: default; text-align: center; color: #888; font-style: italic; }
+
+
+/* --- MODAL DE CONFIRMAÇÃO --- */
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); display: flex; justify-content: center; align-items: center; z-index: 1000; }
+.modal-content { background-color: #1c1f2b; padding: 40px; border-radius: 10px; border: 3px solid #ff5555; text-align: center; max-width: 600px; box-shadow: 0 0 30px rgba(255,0,0,0.5); }
+.modal-content h2 { color: #ff5555; font-size: 1.5em; margin-bottom: 20px; }
+.modal-content p { color: #f0c0c0; line-height: 1.6; margin-bottom: 30px; }
+.modal-buttons { display: flex; justify-content: center; gap: 20px; }
+.modal-buttons button { padding: 12px 25px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; }
+#confirmClearActionBtn { background-color: #d93434; color: white; }
+#cancelClearActionBtn { background-color: #555; color: white; }
+
+/* --- OVERLAY DE CARREGAMENTO --- */
+#loadingOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); display: flex; justify-content: center; align-items: center; z-index: 2000; }
+#loadingOverlay img { max-width: 100px; }
+
+/* --- RODAPÉ --- */
+footer { padding: 15px; font-size: 12px; color: rgba(192,192,160,0.3); text-align: center; width: 100%; flex-shrink: 0; margin-top: auto; }
+/* ==================== PAINEL DE LOGS ==================== */
+#logsPanel {
+    width: 90%;
+    max-width: 1000px; /* Aumentado para logs */
+    max-height: 90vh;
+}
+
+#logsContainer {
+    height: 50vh; /* Altura fixa para a lista */
+    overflow-y: auto; /* Barra de scroll vertical */
+    border: 1px solid #5a5f3c;
+    border-radius: 4px;
+    background-color: #0d1117;
+}
+
+.logs-table {
+    width: 100%;
+    border-collapse: collapse; /* Remove espaço entre células */
+}
+
+.logs-table th, .logs-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #1c1f2b;
+    font-size: 0.9em;
+}
+
+.logs-table th {
+    background-color: #161b22;
+    color: #9abf8f;
+    position: sticky; /* Cabeçalho fica fixo ao rolar */
+    top: 0;
+}
+
+.log-row:hover {
+    background-color: #1c1f2b;
+    cursor: pointer;
+}
+
+/* Estilo para linha selecionada */
+.log-row.selected {
+    background-color: #3b4e2a; 
+}
+
+/* Estilo para log revertido */
+.log-row.reverted td {
+    color: #666;
+    text-decoration: line-through;
+}
+
+#logsActions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+#revertLogsBtn {
+    background-color: #b86a1d;
+    border-color: #ffb870;
+}
+#revertLogsBtn:hover {
+    background-color: #d17d29;
+}

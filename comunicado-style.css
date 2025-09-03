@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body { font-family: 'Roboto', sans-serif; background-color: #e0e0e0; color: #333; line-height: 1.6; display: flex; flex-direction: column; align-items: center; padding: 20px; }
+
+.container { background-color: #fff; width: 21cm; min-height: 29.7cm; box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); display: flex; flex-direction: column; }
+
+.page-header { padding: 1cm 2cm 15px 2cm; border-bottom: 2px solid #333; display: flex; justify-content: space-between; align-items: center; text-align: center; flex-shrink: 0; }
+.page-header .logo img { max-height: 70px; }
+.page-header .school-info { font-size: 14px; }
+
+.page-content { flex-grow: 1; padding: 30px 2cm; }
+.page-content h2 { text-align: center; font-size: 16px; margin-bottom: 30px; }
+
+p, blockquote { text-align: justify; margin-bottom: 1.5em; }
+blockquote { border-left: 3px solid #ccc; padding-left: 15px; font-style: italic; }
+.warning { text-align: center; font-weight: bold; }
+.justification { margin-top: 40px; }
+.justification h3 { text-align: center; font-size: 14px; font-weight: bold; }
+.justification hr { border: 0; border-top: 1px solid #333; margin: 20px 0; }
+
+.signature-area { padding-top: 50px; display: flex; justify-content: space-between; align-items: flex-end; }
+.signature-field { text-align: center; width: 60%; }
+.signature-field hr { border: 0; border-top: 1px solid #333; }
+
+.page-footer { padding: 20px 2cm 1cm 2cm; text-align: center; font-size: 14px; flex-shrink: 0; }
+
+[contenteditable="true"] { background-color: #fffde7; padding: 2px 4px; border-radius: 3px; font-weight: bold; outline: none; transition: background-color 0.3s; border-bottom: 1px dotted #999; }
+[contenteditable="true"]:hover { background-color: #fff9c4; }
+[contenteditable="true"]:focus { background-color: #c8e6c9; box-shadow: 0 0 5px rgba(76, 175, 80, 0.5); }
+
+#print-btn { margin-top: 20px; padding: 12px 25px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: background-color 0.3s; }
+#print-btn:hover { background-color: #45a049; }
+
+@page { size: A4; margin: 0; }
+@media print {
+    body { background-color: #fff; padding: 0; }
+    .container { box-shadow: none; border: none; }
+    #print-btn { display: none; }
+    [contenteditable="true"] { background-color: transparent; font-weight: bold; padding: 0; border-bottom: none; }
+}
